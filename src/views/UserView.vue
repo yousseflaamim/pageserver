@@ -40,7 +40,9 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
+  
   name:'UserView',
   data() {
     return {
@@ -69,7 +71,7 @@ export default {
     localStorage.removeItem('JWT_TOKEN');
     
     // تقوم بتنفيذ إعادة التوجيه لصفحة تسجيل الدخول أو أي صفحة أخرى ترغب فيها
-    this.$router.push('/login');ج
+    this.$router.push('/login');
     },
        fetchBooks() {
       axios.get('http://localhost:8080/library/books')
@@ -103,7 +105,7 @@ export default {
       }
     }
   }
-}
+
 </script>
 
 <style scoped>

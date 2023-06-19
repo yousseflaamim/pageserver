@@ -19,7 +19,7 @@
             <p class="account-question">Don't have an account?</p>
             <router-link to="/register" class="signup-link">Click here</router-link>
           </div>
-          <button class="login-button" @click="login">Login</button>
+    <button class="login-button" @click="login">Login</button>
         </form>
       </div>
     </main>
@@ -100,36 +100,48 @@ input {
 }
 </style>
 
-<script>
-import axios from 'axios';
+
+
+<script lang="ts">
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import HandelLoginService from '../service/HandelLoginService';
+import  UserDetail  from '../models/UserDetail';
 
 export default {
-  name:'LoginView',
-  data() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
- methods: {
-  async login() {
-    const userData = {
-      username: this.username,
-      password: this.password
+  setup() {
+    const username = ref('');
+    const password = ref('');
+
+    const login = async () => {
+      const userDetails: UserDetail = {
+        username: username.value,
+        password: password.value,
+        role: '' // تعويض القيمة المطلوبة لـ `role`
+      };
+
+      const result = await HandelLoginService.login(userDetails);
+
+      if (result === 'Successfully') {
+        const router = useRouter();
+        router.push('/adminviewbooks');
+      } else {
+        // اسم المستخدم أو كلمة المرور غير صحيحة
+        // قم بإظهار رسالة خطأ للمستخدم
+      }
     };
 
-    axios.post('http://localhost:3000/auth/login', userData)
-      .then(response => {
-        // التعامل مع الاستجابة هنا
-        console.log(response.data); // مثال: عرض بيانات الاستجابة في وحدة التحكم
-        // توجيه المستخدم إلى صفحة adminviewbooks بعد تسجيل الدخول الناجح
-        this.$router.push('/adminviewbooks');
-      })
-      .catch(error => {
-        // التعامل مع الخطأ هنا
-        console.log(error.response.data); // مثال: عرض بيانات الخطأ في وحدة التحكم
-      });
-  }
-}
-}
+    return {
+      username,
+      password,
+      login
+    };
+  },
+};
 </script>
+
+
+
+
+
+

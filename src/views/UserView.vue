@@ -39,8 +39,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
+const API_URL = 'http://localhost:8080';
 export default {
   
   name:'UserView',
@@ -72,7 +73,7 @@ export default {
     this.$router.push('/');
     },
        fetchBooks() {
-      axios.get('http://localhost:8080/library/books')
+      axios.get('${API_URL}/library/books')
         .then(response => {
           this.books = response.data;
         })
@@ -81,7 +82,7 @@ export default {
         });
     },
     searchBooks() {
-      axios.get(`http://localhost:8080/library/books/search?q=${this.searchQuery}`)
+      axios.get(`${API_URL}/library/books/search?q=${this.searchQuery}`)
         .then(response => {
           this.books = response.data;
         })

@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import AdminViewRemovingPromotingUser from "../views/AdminViewRemovingPromotingUser.vue";
 
 export default {
@@ -91,10 +91,10 @@ export default {
     viewUser() {
     },
     viewBooks() {
-       const userBooks = this.books.filter(book => book.author === 'yo1'); 
+       const userBooks = this.books.filter(book => book.author === 'yo1');
 
     console.log('User Books:', userBooks);
-  
+
     },
     promoteUser() {
     },
@@ -198,7 +198,7 @@ export default {
   display: flex;
   justify-content: right;;
   margin-bottom: 1px;
-  
+
 }
 #user{
   background-color: black;
@@ -208,7 +208,7 @@ export default {
 
 .button-container button {
   width: 150px;
-  font-size: 18px; 
+  font-size: 18px;
 }
 #btn1{
   margin: 12px;
@@ -265,3 +265,4 @@ export default {
 
 }
 </style>
+

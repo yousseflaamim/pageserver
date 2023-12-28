@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
 export default {
   name:'AdminViewRemovingPromoting',
@@ -62,3 +62,4 @@ export default {
     background-color: green;
 }
 </style>
+

@@ -33,8 +33,9 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from "axios";
+const API_URL = 'http://localhost:8080/library';
 export default {
   name:'GuestView',
   data() {
@@ -68,7 +69,7 @@ methods: {
       }
     },
       fetchBooks() {
-      axios.get('http://localhost:8080/library/books')
+      axios.get(`${API_URL}/books`)
         .then(response => {
           this.books = response.data;
         })
@@ -77,7 +78,7 @@ methods: {
         });
     },
     searchBooks() {
-      axios.get(`http://localhost:8080/library/books/search?q=${this.searchQuery}`)
+      axios.get(`${API_URL}/books/search?q=${this.searchQuery}`)
         .then(response => {
           this.books = response.data;
         })
@@ -218,3 +219,4 @@ methods: {
 }
 
 </style>
+

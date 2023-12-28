@@ -59,11 +59,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 
 
 import axios from 'axios';
 import AdminViewEditingAddingBook from './AdminViewEditingAddingBook.vue';
+const API_URL = 'http://localhost:8080/library';
 
 
 export default {
@@ -71,25 +72,30 @@ export default {
   components: {
     AdminViewEditingAddingBook
   },
-  data() {
-    return {
-      books: [
-        { id: 1, title: 'londen 1', author: 'y1', quantity: 5, order: 1 },
-        { id: 2, title: 'paris 2', author: 'you2', quantity: 8, order: 2 },
-        { id: 1, title: 'milano 1', author: 'ssef1', quantity: 12, order: 3 },
-        { id: 2, title: 'malmo 2', author: 'yoyof2', quantity: 200, order: 6 },
-      ],
-      showModal: false,
-      modalMode: 'add',
-      selectedBook: null,
-    };
-  },
+ data(): {
+   books: Array<{ id: number, title: string, author: string, quantity: number, order: number }>,
+   showModal: boolean,
+   modalMode: string,
+   selectedBook: { id: number, title: string, author: string, quantity: number, order: number } | null
+ } {
+   return {
+     books: [
+       { id: 1, title: 'londen 1', author: 'y1', quantity: 5, order: 1 },
+       { id: 2, title: 'paris 2', author: 'you2', quantity: 8, order: 2 },
+       { id: 1, title: 'milano 1', author: 'ssef1', quantity: 12, order: 3 },
+       { id: 2, title: 'malmo 2', author: 'yoyof2', quantity: 200, order: 6 },
+     ],
+     showModal: false,
+     modalMode: 'add',
+     selectedBook: null,
+   };
+ },
    created() {
     this.fetchBooks();
   },
   methods: {
       fetchBooks() {
-      axios.get('http://localhost:8080/library/profile')
+      axios.get('${API_URL}/profile')
         .then(response => {
           this.books = response.data;
         })
@@ -98,12 +104,12 @@ export default {
         });
     },
 
-    editBook(book) {
+editBook(book: { id: number, title: string, author: string, quantity: number, order: number }): void {
       this.modalMode = 'edit';
       this.selectedBook = { ...book };
       this.showModal = true;
     },
-    deleteBook(book) {
+deleteBook(book: { id: number, title: string, author: string, quantity: number, order: number }): void {
       const index = this.books.findIndex(b => b.id === book.id);
       if (index !== -1) {
         this.books.splice(index, 1);
@@ -114,7 +120,7 @@ export default {
       this.selectedBook = { title: '', author: '', quantity: 0, order: 0 };
       this.showModal = true;
     },
-    saveBook(updatedBook) {
+saveBook(updatedBook: { id: number, title: string, author: string, quantity: number, order: number }): void {
       if (this.modalMode === 'add') {
         updatedBook.id = this.books.length + 1;
         this.books.push(updatedBook);
@@ -140,8 +146,8 @@ export default {
       }
     },
     singout() {
-    
-      this.$router.push('/'); 
+
+      this.$router.push('/');
     }
   }
 }
@@ -220,5 +226,7 @@ button {
 
 
 </style>
+
+
 
 

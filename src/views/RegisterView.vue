@@ -92,9 +92,9 @@ input {
 }
 </style>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
-
+//const API_URL = 'http://localhost:8080';
 export default {
   name: 'RegisterView',
   data() {
@@ -114,7 +114,7 @@ export default {
   }
    /* signup() {
   axios
-    .post('http://localhost:3000/auth/register', {
+    .post(`${API_URL}/auth/register', {
       username: this.username,
       password: this.password
     })

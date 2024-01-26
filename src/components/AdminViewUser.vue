@@ -58,7 +58,7 @@
   <h6 class="name"> © youssef laamim</h6>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
 
 import AdminViewEditUser from "@/components/AdminViewEditUser.vue";

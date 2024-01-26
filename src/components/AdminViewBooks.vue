@@ -73,7 +73,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import axios from 'axios';
 import AdminViewEditingAddingBook from '@/components/AdminViewEditingAddingBook.vue';
 import AdminViewEdit from "@/components/AdminViewEditBook.vue";
